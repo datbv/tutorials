@@ -1,11 +1,11 @@
 package com.datbv.di.service;
 
-import com.datbv.di.annotation.Instance;
+import com.datbv.di.annotation.Component;
 import java.time.Instant;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Instance
+@Component
 public class RestaurantService {
 
   public void doSomething() {

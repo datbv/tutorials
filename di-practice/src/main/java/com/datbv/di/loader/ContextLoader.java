@@ -1,8 +1,8 @@
 package com.datbv.di.loader;
 
-import com.datbv.di.annotation.Dependency;
-import com.datbv.di.annotation.Instance;
-import com.datbv.di.annotation.PostInitiate;
+import com.datbv.di.annotation.Autowire;
+import com.datbv.di.annotation.Component;
+import com.datbv.di.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ContextLoader {
 
   public synchronized void load(String scanPackage) {
     val reflections = new Reflections(scanPackage);
-    val classes = reflections.getTypesAnnotatedWith(Instance.class);
+    val classes = reflections.getTypesAnnotatedWith(Component.class);
 
     initiateInstance(classes);
     for (val entry : nameToInstance.entrySet()) {
@@ -69,7 +69,7 @@ public class ContextLoader {
   private static void invokePostInitiate(Object instance) {
     val postMethods = Arrays.stream(instance.getClass().getDeclaredMethods()).filter(
             method -> Arrays.stream(method.getDeclaredAnnotations())
-                .anyMatch(a -> a.annotationType() == PostInitiate.class))
+                .anyMatch(a -> a.annotationType() == PostConstruct.class))
         .toList();
     if (postMethods.isEmpty()) {
       return;
@@ -90,7 +90,7 @@ public class ContextLoader {
     val fields = instance.getClass().getDeclaredFields();
     Arrays.stream(fields)
         .filter(field -> Arrays.stream(field.getDeclaredAnnotations())
-            .anyMatch(a -> a.annotationType() == Dependency.class))
+            .anyMatch(a -> a.annotationType() == Autowire.class))
         .forEach(field -> {
           val value = nameToInstance.get(field.getType().getName());
           field.setAccessible(true);
@@ -104,7 +104,7 @@ public class ContextLoader {
   }
 
 
-  public <T> T getObject(Class<T> clazz) {
+  public <T> T getBean(Class<T> clazz) {
     return (T) nameToInstance.get(clazz.getName());
   }
 }

@@ -1,7 +1,7 @@
 package com.datbv.di;
 
-import com.datbv.di.annotation.Dependency;
-import com.datbv.di.annotation.Instance;
+import com.datbv.di.annotation.Autowire;
+import com.datbv.di.annotation.Component;
 import com.datbv.di.loader.ContextLoader;
 import com.datbv.di.loader.Runner;
 import com.datbv.di.service.OrderService;
@@ -10,10 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 @Slf4j
-@Instance
+@Component
 public class Application implements Runner {
 
-  @Dependency
+  @Autowire
   private OrderService orderService;
 
   public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class Application implements Runner {
     orderService.makeOrder();
 
     val restaurantService = ContextLoader.getInstance()
-        .getObject(RestaurantService.class);
+        .getBean(RestaurantService.class);
     restaurantService.logToday();
   }
 }

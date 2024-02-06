@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 
 @Target(METHOD)
 @Retention(RUNTIME)
-public @interface PostInitiate {
+public @interface PostConstruct {
 
 }

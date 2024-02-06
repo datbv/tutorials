@@ -1,21 +1,21 @@
 package com.datbv.di.service;
 
-import com.datbv.di.annotation.Dependency;
-import com.datbv.di.annotation.Instance;
-import com.datbv.di.annotation.PostInitiate;
+import com.datbv.di.annotation.Autowire;
+import com.datbv.di.annotation.Component;
+import com.datbv.di.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Instance
+@Component
 public class OrderService {
 
-  @Dependency
+  @Autowire
   private PaymentService paymentService;
 
-  @Dependency
+  @Autowire
   private RestaurantService restaurantService;
 
-  @PostInitiate
+  @PostConstruct
   void postInitiate() {
     log.info("Do something after creating orderService instance");
   }
