@@ -7,7 +7,10 @@ public class GameConfig {
     private final int mapSize;
     private final boolean hideMonsterLocation;
 
-    private GameConfig(final int numberOfMonsters, final int bulletCount, final int mapSize, final boolean hideMonsterLocation) {
+    private GameConfig(final int numberOfMonsters,
+        final int bulletCount,
+        final int mapSize,
+        final boolean hideMonsterLocation) {
         this.numberOfMonsters = numberOfMonsters;
         this.bulletCount = bulletCount;
         this.mapSize = mapSize;
@@ -31,7 +34,7 @@ public class GameConfig {
     }
 
     public static GameConfig defaultConfig() {
-        return builder().bulletCount(4).numberOfMonsters(4).mapSize(5).hideMonsterLocation(false).build();
+        return builder().bulletCount(4).numberOfMonsters(3).mapSize(6).hideMonsterLocation(false).build();
     }
 
     public static GameConfigBuilder builder() {

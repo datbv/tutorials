@@ -7,12 +7,12 @@ package com.oop.characteristic;
 
 public interface Movable {
 
-    void moveUp(int boundary);
+    void moveUp();
 
-    void moveDown(int boundary);
+    void moveDown();
 
-    void moveLeft(int boundary);
+    void moveLeft();
 
-    void moveRight(int boundary);
+    void moveRight();
 
 }

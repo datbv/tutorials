@@ -31,7 +31,7 @@ public class Bear extends Monster {
 
     @Override
     public void attackedBy(Hunter hunter) {
-        beAttacked(100);
+        beAttacked(50);
     }
 
 }

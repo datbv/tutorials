@@ -47,7 +47,9 @@ public class Game {
     private List<Monster> generateMonsters(Hunter hero, int noOfMonsters) {
         final var generatedMonsters = new ArrayList<Monster>(noOfMonsters);
         for (int i = 0; i < noOfMonsters; i++) {
-            final var ignoreLocations = generatedMonsters.stream().map(Monster::getLocation).collect(Collectors.toList());
+            final var ignoreLocations = generatedMonsters.stream()
+                .map(Monster::getLocation)
+                .collect(Collectors.toList());
             ignoreLocations.add(hero.getLocation());
             final var monsterLocation = GameUtils.generateRandomLocation(gameConfig.getMapSize(), ignoreLocations);
             final var bat = new Bear(monsterLocation);
@@ -81,7 +83,8 @@ public class Game {
     }
 
     private void checkHeroIsOnMonster() {
-        boolean stepOnMonster = monsters.stream().map(Monster::getLocation).anyMatch(l -> l.equals(hero.getLocation()));
+        boolean stepOnMonster = monsters.stream().map(Monster::getLocation)
+            .anyMatch(l -> l.equals(hero.getLocation()));
         if (stepOnMonster) {
             lose();
         }
@@ -110,7 +113,8 @@ public class Game {
             return hero.name();
         }
 
-        final var monsterOpt = monsters.stream().filter(monster -> monster.getLocation().equals(currentLocation)).findFirst();
+        final var monsterOpt = monsters.stream()
+            .filter(monster -> monster.getLocation().equals(currentLocation)).findFirst();
         if (monsterOpt.isEmpty()) {
             return "-";
         }
